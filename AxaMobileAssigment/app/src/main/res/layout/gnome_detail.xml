@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+                                             xmlns:tools="http://schemas.android.com/tools"
+                                             android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.android.volley.toolbox.NetworkImageView
+            android:id="@+id/ivGnomeImage"
+            android:layout_width="114dp"
+            android:layout_height="122dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginLeft="21dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginStart="21dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0.06"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.058"/>
+
+        <TextView
+            android:id="@+id/tvGnomeNameTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/ivGnomeImage"
+            android:layout_marginStart="11dp"
+            android:layout_toEndOf="@+id/ivGnomeImage"
+            android:text="@string/gnome_name"/>
+
+        <TextView
+            android:id="@+id/tvGnomeName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/tvGnomeNameTitle"
+            android:layout_alignBottom="@+id/tvGnomeNameTitle"
+            android:layout_marginStart="18dp"
+            android:layout_toEndOf="@+id/tvGnomeNameTitle"
+            android:text="@string/gnome_name_default"/>
+
+        <TextView
+            android:id="@+id/tvGnomeAgeTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/gnome_age"
+            android:layout_below="@+id/tvGnomeNameTitle"
+            android:layout_alignStart="@+id/tvGnomeNameTitle"
+            android:layout_marginTop="9dp"/>
+
+        <TextView
+            android:id="@+id/tvGnomeAge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/gnome_age_default"
+            android:layout_alignBaseline="@+id/tvGnomeAgeTitle"
+            android:layout_alignBottom="@+id/tvGnomeAgeTitle"
+            android:layout_alignStart="@+id/tvGnomeName"/>
+
+        <TextView
+            android:id="@+id/tvGnomeWeightTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/gnome_weight"
+            android:layout_below="@+id/tvGnomeAgeTitle"
+            android:layout_alignStart="@+id/tvGnomeAgeTitle"
+            android:layout_marginTop="7dp"/>
+
+        <TextView
+            android:id="@+id/tvGnomeWeight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/gnome_weight_default"
+            android:layout_alignBaseline="@+id/tvGnomeWeightTitle"
+            android:layout_alignBottom="@+id/tvGnomeWeightTitle"
+            android:layout_alignStart="@+id/tvGnomeAge"/>
+
+        <TextView
+            android:id="@+id/tvGnomeHeightTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/gnome_height"
+            android:layout_below="@+id/tvGnomeWeight"
+            android:layout_alignStart="@+id/tvGnomeWeightTitle"
+            android:layout_marginTop="5dp"/>
+
+        <TextView
+            android:id="@+id/tvGnomeHeight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/gnome_height_default"
+            android:layout_alignBaseline="@+id/tvGnomeHeightTitle"
+            android:layout_alignBottom="@+id/tvGnomeHeightTitle"
+            android:layout_alignStart="@+id/tvGnomeWeight"/>
+
+        <TextView
+            android:id="@+id/tvGnomeHairColorTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/gnome_hair_color"
+            android:layout_alignBottom="@+id/ivGnomeImage"
+            android:layout_alignStart="@+id/tvGnomeHeightTitle"
+            android:layout_marginBottom="4dp"/>
+
+        <TextView
+            android:id="@+id/tvGnomeHairColor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/gnome_hair_color_default"
+            android:layout_alignBaseline="@+id/tvGnomeHairColorTitle"
+            android:layout_alignEnd="@+id/tvGnomeWeight"/>
+
+    </RelativeLayout>
+
+    <View style="@style/Divider"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvGnomeProfesions"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/gnome_profesions"
+            android:layout_gravity="center"
+            />
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="136dp"
+            android:id="@+id/lvProfessions"/>
+
+    </LinearLayout>
+
+    <View style="@style/Divider"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/tvGnomeFriends"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/gnome_friends"
+            android:layout_gravity="center"
+            />
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="113dp"
+            android:id="@+id/lvFriends"/>
+
+
+    </LinearLayout>
+</LinearLayout>
