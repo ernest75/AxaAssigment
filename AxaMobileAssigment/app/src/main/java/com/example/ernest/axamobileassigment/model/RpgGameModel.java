@@ -24,19 +24,19 @@ public class RpgGameModel {
     public static Hashtable<String, Long> ProfessionsId = new Hashtable<String, Long>();
     public static Hashtable<String, Long> GnomesId = new Hashtable<String,Long>();
 
-    private void RpgGameModel(){
-
-    }
-
-    private static RpgGameModel mInstance;
-
-    public static RpgGameModel getInstance()  {
-        if (mInstance == null)
-        {
-            mInstance = new RpgGameModel();
-        }
-        return mInstance;
-    }
+//    private void RpgGameModel(){
+//
+//    }
+//
+//    private static RpgGameModel mInstance;
+//
+//    public static RpgGameModel getInstance()  {
+//        if (mInstance == null)
+//        {
+//            mInstance = new RpgGameModel();
+//        }
+//        return mInstance;
+//    }
 
     public void InsertNewTown(String jsonString, Context context){
 

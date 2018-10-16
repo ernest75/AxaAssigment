@@ -1,40 +1,26 @@
 package com.example.ernest.axamobileassigment;
 
-import android.content.ContentValues;
 import android.content.Context;
-import android.content.Intent;
 import android.database.Cursor;
-import android.os.AsyncTask;
 import android.os.Environment;
-import android.os.Looper;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
 import com.example.ernest.axamobileassigment.adapters.AxaAssigmentGnomesAdapter;
 import com.example.ernest.axamobileassigment.database.AxaAssigmentContract;
 import com.example.ernest.axamobileassigment.database.AxaAssigmentDbSqlite;
+import com.example.ernest.axamobileassigment.model.City;
 import com.example.ernest.axamobileassigment.model.RpgGameModel;
-import com.example.ernest.axamobileassigment.volleyhelper.VolleySingleton;
-import com.example.ernest.axamobileassigment.database.AxaAssigmentContract.*;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.example.ernest.axamobileassigment.networking.GnomesApi;
+import com.example.ernest.axamobileassigment.screens.common.activities.BaseActivity;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -42,31 +28,39 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.ArrayList;
-import java.util.Hashtable;
-import java.util.Map;
-import java.util.Vector;
 
 
-import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
+import javax.inject.Inject;
 
-public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor>{
+import retrofit2.Call;
+import retrofit2.Callback;
+
+public class MainActivity extends BaseActivity implements LoaderManager.LoaderCallbacks<Cursor>{
 
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
-    private static final String UPLOAD_URL = "https://raw.githubusercontent.com/rrafols/mobile_test/master/data.json";
+    //private static final String UPLOAD_URL = "https://raw.githubusercontent.com/rrafols/mobile_test/master/data.json";
     private static final int LOADER_GNOMES_ID = 1;
     private static final int WRITE_EXTERNAL_STORAGE_ID = 2;
 
 
-    ListView mLvGnomes;
+    RecyclerView mRvGnomes;
     Button mBtnGetGnomes;
+
+    @Inject
     Context mContext;
+
+    @Inject
+    RpgGameModel mRpgGameModel;
+
+    @Inject
+    GnomesApi mGnomesApi;
+
     ProgressBar mProgressBar;
     private AxaAssigmentGnomesAdapter mAdapter;
 
     private AxaAssigmentDbSqlite mOpenHelper;
 
-    RpgGameModel mRpgGameModel;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,28 +70,30 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         //Uncomment that method when cheking sqlite db
         //requestPermission();
 
-        mContext = this;
-        mRpgGameModel = RpgGameModel.getInstance();
+//        mContext = this;
+
+        getPresentationComponent().inject(this);
+        //mRpgGameModel = RpgGameModel.getInstance();
 
         //getting references
-        mLvGnomes = (ListView)findViewById(R.id.lvGnomes);
+        mRvGnomes = findViewById(R.id.lvGnomes);
         mBtnGetGnomes = (Button)findViewById(R.id.btnGetGnomes);
         mProgressBar = (ProgressBar)findViewById(R.id.pbWaitingCircle);
 
         //initializations
         mOpenHelper = new AxaAssigmentDbSqlite(mContext);
-        mAdapter = new AxaAssigmentGnomesAdapter(mContext,null,0);
+        //mAdapter = new AxaAssigmentGnomesAdapter(mContext,null,0);
 
-        mLvGnomes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long id) {
-                Intent intent = new Intent(mContext,GnomesDetail.class);
-                int id_local = (int)id;
-                intent.putExtra("id_local", id_local);
-                startActivity(intent);
-            }
-        });
-        mLvGnomes.setAdapter(mAdapter);
+//        mRvGnomes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> adapterView, View view, int i, long id) {
+//                Intent intent = new Intent(mContext,GnomesDetail.class);
+//                int id_local = (int)id;
+//                intent.putExtra("id_local", id_local);
+//                startActivity(intent);
+//            }
+//        });
+//        mRvGnomes.setAdapter(mAdapter);
 
         mProgressBar.setVisibility(View.GONE);
 
@@ -121,44 +117,58 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
 
-        mAdapter.swapCursor(data);
+       // mAdapter.swapCursor(data);
 
     }
 
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
 
-        mAdapter.swapCursor(null);
+        //mAdapter.swapCursor(null);
 
     }
 
     public void getGnomesFromServer() {
-        StringRequest stringRequest = new StringRequest(UPLOAD_URL, new Response.Listener<String>() {
-                @Override
-                public void onResponse(String s) {
-                    new AsyncTask<String, Void, Void>() {
-                        @Override
-                        protected Void doInBackground(String... strings) {
+//        StringRequest stringRequest = new StringRequest(UPLOAD_URL, new Response.Listener<String>() {
+//                @Override
+//                public void onResponse(String s) {
+//                    new AsyncTask<String, Void, Void>() {
+//                        @Override
+//                        protected Void doInBackground(String... strings) {
+//
+//                            mRpgGameModel.InsertNewTown(strings[0], mContext);
+//                            return null;
+//                        }
+//
+//                        @Override
+//                        protected void onPostExecute(Void aVoid) {
+//                            super.onPostExecute(aVoid);
+//                            mProgressBar.setVisibility(View.GONE);
+//                        }
+//                    }.execute(s);
+//                }
+//            },
+//            new Response.ErrorListener(){
+//                @Override
+//                public void onErrorResponse(VolleyError volleyError) {
+//
+//                }
+//            });
+//        VolleySingleton.getInstance(mContext).addToRequestQueue(stringRequest);
+        mGnomesApi.getGnomes().enqueue(new Callback<City>() {
+            @Override
+            public void onResponse(Call<City> call, retrofit2.Response<City> response) {
+                Log.e("SERVER RESPONSE : ", response.body().brastlewark.get(0).name);
+                mRvGnomes.setLayoutManager(new LinearLayoutManager(mContext));
+                mRvGnomes.setAdapter(new AxaAssigmentGnomesAdapter(response.body().brastlewark));
+                mProgressBar.setVisibility(View.GONE);
+            }
 
-                            mRpgGameModel.InsertNewTown(strings[0], mContext);
-                            return null;
-                        }
-
-                        @Override
-                        protected void onPostExecute(Void aVoid) {
-                            super.onPostExecute(aVoid);
-                            mProgressBar.setVisibility(View.GONE);
-                        }
-                    }.execute(s);
-                }
-            },
-            new Response.ErrorListener(){
-                @Override
-                public void onErrorResponse(VolleyError volleyError) {
-
-                }
-            });
-        VolleySingleton.getInstance(mContext).addToRequestQueue(stringRequest);
+            @Override
+            public void onFailure(Call<City> call, Throwable t) {
+                Log.e(LOG_TAG,"Server error");
+            }
+        });
     }
 
 

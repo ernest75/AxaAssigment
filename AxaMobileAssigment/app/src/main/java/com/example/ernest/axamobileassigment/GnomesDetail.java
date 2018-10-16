@@ -14,11 +14,14 @@ import com.android.volley.toolbox.NetworkImageView;
 import com.example.ernest.axamobileassigment.database.AxaAssigmentContract;
 import com.example.ernest.axamobileassigment.database.AxaAssigmentContract.*;
 import com.example.ernest.axamobileassigment.model.RpgGameModel;
+import com.example.ernest.axamobileassigment.screens.common.activities.BaseActivity;
 import com.example.ernest.axamobileassigment.volleyhelper.VolleySingleton;
 
 import java.util.ArrayList;
 
-public class GnomesDetail extends AppCompatActivity {
+import javax.inject.Inject;
+
+public class GnomesDetail extends BaseActivity {
 
     //variables member
     private static final String LOG_TAG = GnomesDetail.class.getSimpleName() ;
@@ -26,16 +29,21 @@ public class GnomesDetail extends AppCompatActivity {
     TextView mTvAge,mTvName,mTvWeight,mTvHeight,mTvHairColor;
     ListView mLvProfessions, mLvGnomeFriends;
     NetworkImageView mNiGnomePicture;
+    @Inject
     RpgGameModel mRpgGameModel;
     ArrayList<String> mProfessionsArray, mFriendsArray;
-    private Context mContext;
+
+    @Inject
+    Context mContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.gnome_detail);
 
-        mRpgGameModel= RpgGameModel.getInstance();
+        getPresentationComponent().inject(this);
+
+        //mRpgGameModel= RpgGameModel.getInstance();
 
         //Getting references
         mTvName = (TextView)findViewById(R.id.tvGnomeName);
@@ -47,7 +55,6 @@ public class GnomesDetail extends AppCompatActivity {
         mLvGnomeFriends=(ListView )findViewById(R.id.lvFriends);
         mNiGnomePicture = (NetworkImageView)findViewById(R.id.ivGnomeImage);
 
-        mContext = this;
         mProfessionsArray = new ArrayList<>();
         mFriendsArray = new ArrayList<>();
 
