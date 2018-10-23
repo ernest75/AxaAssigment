@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <com.android.volley.toolbox.NetworkImageView
+        <ImageView
             android:id="@+id/ivGnomeImage"
             android:layout_width="114dp"
             android:layout_height="122dp"
@@ -117,7 +117,8 @@
             android:layout_height="wrap_content"
             android:text="@string/gnome_hair_color_default"
             android:layout_alignBaseline="@+id/tvGnomeHairColorTitle"
-            android:layout_alignEnd="@+id/tvGnomeWeight"/>
+            android:layout_toEndOf="@+id/tvGnomeHairColorTitle"
+            android:layout_marginLeft="6dp"/>
 
     </RelativeLayout>
 

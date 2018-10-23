@@ -1,30 +1,42 @@
 package com.example.ernest.axamobileassigment.adapters;
 
+import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
+import com.android.volley.toolbox.NetworkImageView;
+import com.bumptech.glide.Glide;
+import com.example.ernest.axamobileassigment.Constants;
+import com.example.ernest.axamobileassigment.GnomesDetail;
+import com.example.ernest.axamobileassigment.ItemClickListener;
 import com.example.ernest.axamobileassigment.R;
 
+import com.example.ernest.axamobileassigment.glide.GlideApp;
 import com.example.ernest.axamobileassigment.model.Gnome;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by Ernest on 06/11/2017.
  */
 
-//todo afegir image
 
-public class AxaAssigmentGnomesAdapter extends RecyclerView.Adapter<AxaAssigmentGnomesAdapter.ViewHolder> {
+public class AxaAssigmentGnomesAdapter extends RecyclerView.Adapter<AxaAssigmentGnomesAdapter.ViewHolder>  {
 
 
-    List<Gnome> mGnomesList;
-
-    public AxaAssigmentGnomesAdapter (List<Gnome> gnomes ){
+    private List<Gnome> mGnomesList;
+    private Context mContext;
+    public AxaAssigmentGnomesAdapter(List<Gnome> gnomes, Context context){
         mGnomesList = gnomes;
+        mContext = context;
     }
     private LayoutInflater mCursorInflater;
 
@@ -63,8 +75,30 @@ public class AxaAssigmentGnomesAdapter extends RecyclerView.Adapter<AxaAssigment
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Gnome gnome = mGnomesList.get(position);
+        final Gnome gnome = mGnomesList.get(position);
         holder.mGnomeName.setText(gnome.name);
+        GlideApp
+                .with(mContext)
+                .load(gnome.thumbnail)
+                .centerCrop()
+                .into(holder.mGnomePicture);
+
+        holder.setItemClickListener(new ItemClickListener() {
+            @Override
+            public void onClick(View view, int position, boolean isLongClick) {
+                Intent intent = new Intent(mContext,GnomesDetail.class);
+                intent.putExtra(Constants.GNOME_NAME, gnome.name);
+                intent.putExtra(Constants.GNOME_AGE,gnome.age);
+                intent.putExtra(Constants.GNOME_WEIGHT,gnome.weight);
+                intent.putExtra(Constants.GNOME_HEIGHT,gnome.height);
+                intent.putExtra(Constants.GNOME_HAIR_COLOR,gnome.hairColor);
+                intent.putStringArrayListExtra(Constants.GNOME_PROFESSIONS, (ArrayList<String>) gnome.professions);
+                intent.putStringArrayListExtra(Constants.GNOME_FRIENDS, (ArrayList<String>) gnome.friends);
+                intent.putExtra(Constants.GNOME_PICTURE, gnome.thumbnail);
+                mContext.startActivity(intent);
+            }
+        });
+
     }
 
     @Override
@@ -72,13 +106,35 @@ public class AxaAssigmentGnomesAdapter extends RecyclerView.Adapter<AxaAssigment
         return mGnomesList.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+
+
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
 
         TextView mGnomeName;
+        ImageView mGnomePicture;
+        public ItemClickListener mItemClickListener;
 
         public ViewHolder(View itemView) {
             super(itemView);
             mGnomeName = itemView.findViewById(R.id.tvGnomeName);
+            mGnomePicture = itemView.findViewById(R.id.ivGnomePicture);
+            itemView.setOnClickListener(this);
+            itemView.setOnLongClickListener(this);
+        }
+
+        public void setItemClickListener(ItemClickListener itemClickListener){
+            mItemClickListener = itemClickListener;
+        }
+
+        @Override
+        public void onClick(View v) {
+            mItemClickListener.onClick(v,getAdapterPosition(),false);
+        }
+
+        @Override
+        public boolean onLongClick(View v) {
+            mItemClickListener.onClick(v,getAdapterPosition(),true);
+            return true;
         }
     }
 }

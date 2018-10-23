@@ -44,6 +44,7 @@ public class MainActivity extends BaseActivity implements LoaderManager.LoaderCa
 
 
     RecyclerView mRvGnomes;
+
     Button mBtnGetGnomes;
 
     @Inject
@@ -93,6 +94,8 @@ public class MainActivity extends BaseActivity implements LoaderManager.LoaderCa
 //                startActivity(intent);
 //            }
 //        });
+
+
 //        mRvGnomes.setAdapter(mAdapter);
 
         mProgressBar.setVisibility(View.GONE);
@@ -160,7 +163,7 @@ public class MainActivity extends BaseActivity implements LoaderManager.LoaderCa
             public void onResponse(Call<City> call, retrofit2.Response<City> response) {
                 Log.e("SERVER RESPONSE : ", response.body().brastlewark.get(0).name);
                 mRvGnomes.setLayoutManager(new LinearLayoutManager(mContext));
-                mRvGnomes.setAdapter(new AxaAssigmentGnomesAdapter(response.body().brastlewark));
+                mRvGnomes.setAdapter(new AxaAssigmentGnomesAdapter(response.body().brastlewark, mContext));
                 mProgressBar.setVisibility(View.GONE);
             }
 

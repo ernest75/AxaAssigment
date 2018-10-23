@@ -3,19 +3,24 @@
                 android:layout_width="fill_parent"
                 android:layout_height="128dp"
                 android:padding="8dp">
-    <!--<com.android.volley.toolbox.NetworkImageView-->
-        <!--android:id="@+id/idThumbnail"-->
-        <!--android:layout_width="80dp"-->
-        <!--android:layout_height="80dp"-->
-        <!--android:layout_alignParentLeft="true"-->
-        <!--android:layout_marginRight="8dp"/>-->
+    <ImageView
+        android:id="@+id/ivGnomePicture"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginRight="8dp"/>
+
     <TextView
         android:id="@+id/tvGnomeName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="17dp"
+        android:layout_below="@id/ivGnomePicture"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="117dp"
+        android:layout_marginTop="-63dp"
+        android:padding="4dp"
         android:text="defaultName"
-        android:layout_marginRight="16dp"
-        android:layout_marginLeft="16dp"/>
+        android:textSize="17dp"
+        android:textStyle="bold" />
 
 </RelativeLayout>
