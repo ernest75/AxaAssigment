@@ -1,4 +1,4 @@
-package com.example.ernest.axamobileassigment;
+package com.example.ernest.axamobileassigment.screens.gnomedetail;
 
 import android.content.Context;
 import android.content.Intent;
@@ -8,8 +8,10 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.ernest.axamobileassigment.R;
+import com.example.ernest.axamobileassigment.common.Constants;
 import com.example.ernest.axamobileassigment.glide.GlideApp;
-import com.example.ernest.axamobileassigment.screens.common.activities.BaseActivity;
+import com.example.ernest.axamobileassigment.screens.common.BaseActivity;
 
 import java.util.ArrayList;
 
@@ -37,7 +39,6 @@ public class GnomesDetail extends BaseActivity {
 
         getPresentationComponent().inject(this);
 
-        //mRpgGameModel= RpgGameModel.getInstance();
 
         //Getting references
         mTvName = findViewById(R.id.tvGnomeName);
@@ -49,8 +50,8 @@ public class GnomesDetail extends BaseActivity {
         mLvGnomeFriends= findViewById(R.id.lvFriends);
         mIvGnomePicture = findViewById(R.id.ivGnomeImage);
 
-        mProfessionsArray = new ArrayList<>();
-        mFriendsArray = new ArrayList<>();
+//        mProfessionsArray = new ArrayList<>();
+//        mFriendsArray = new ArrayList<>();
 
         Intent intent = getIntent();
         //String name = intent.getStringExtra(Constants.GNOME_NAME);
@@ -79,12 +80,12 @@ public class GnomesDetail extends BaseActivity {
                 mProfessionsArray );
 
         mLvProfessions.setAdapter(arrayAdapterProfessions);
-        ArrayAdapter<String> arrayAdapterFreinds = new ArrayAdapter<String>(
+        ArrayAdapter<String> arrayAdapterFriends = new ArrayAdapter<String>(
                 this,
                 android.R.layout.simple_list_item_1,
                 mFriendsArray);
 
-        mLvGnomeFriends.setAdapter(arrayAdapterFreinds);
+        mLvGnomeFriends.setAdapter(arrayAdapterFriends);
 
    }
 

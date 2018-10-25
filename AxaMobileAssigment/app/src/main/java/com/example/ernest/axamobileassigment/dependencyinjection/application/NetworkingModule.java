@@ -2,7 +2,7 @@ package com.example.ernest.axamobileassigment.dependencyinjection.application;
 
 
 
-import com.example.ernest.axamobileassigment.Constants;
+import com.example.ernest.axamobileassigment.common.Constants;
 import com.example.ernest.axamobileassigment.networking.GnomesApi;
 
 import javax.inject.Singleton;

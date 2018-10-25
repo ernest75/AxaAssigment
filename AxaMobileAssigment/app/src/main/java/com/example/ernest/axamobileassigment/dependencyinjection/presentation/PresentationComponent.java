@@ -2,8 +2,8 @@ package com.example.ernest.axamobileassigment.dependencyinjection.presentation;
 
 
 
-import com.example.ernest.axamobileassigment.GnomesDetail;
-import com.example.ernest.axamobileassigment.MainActivity;
+import com.example.ernest.axamobileassigment.screens.gnomedetail.GnomesDetail;
+import com.example.ernest.axamobileassigment.screens.gnomeslist.GnomesList;
 
 import javax.inject.Singleton;
 
@@ -13,7 +13,7 @@ import dagger.Subcomponent;
 @Subcomponent(modules = PresentationModule.class)
 public interface PresentationComponent {
 
-    void inject(MainActivity mainActivity);
+    void inject(GnomesList gnomesList);
 
     void inject(GnomesDetail gnomesDetail);
 }

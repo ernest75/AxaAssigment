@@ -1,4 +1,4 @@
-package com.example.ernest.axamobileassigment.screens.common.activities;
+package com.example.ernest.axamobileassigment.screens.common;
 
 import android.support.annotation.UiThread;
 import android.support.v7.app.AppCompatActivity;

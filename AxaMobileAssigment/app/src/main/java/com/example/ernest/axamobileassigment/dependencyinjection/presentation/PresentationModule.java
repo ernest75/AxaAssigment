@@ -6,8 +6,6 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 
-import com.example.ernest.axamobileassigment.model.RpgGameModel;
-
 import javax.inject.Singleton;
 
 import dagger.Module;
@@ -42,11 +40,6 @@ public class PresentationModule {
         return activity;
     }
 
-    @Provides
-    @Singleton
-    RpgGameModel rpgGameModel(){
-        return new RpgGameModel();
-    }
 //    @Provides
 //    DialogsManager getDialogsManager(FragmentManager fragmentManager) {
 //        return new DialogsManager(fragmentManager);
