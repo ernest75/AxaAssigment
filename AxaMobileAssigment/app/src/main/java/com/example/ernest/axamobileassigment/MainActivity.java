@@ -213,4 +213,5 @@ public class MainActivity extends BaseActivity implements LoaderManager.LoaderCa
 //        ActivityCompat.requestPermissions(MainActivity.this, new String[]{WRITE_EXTERNAL_STORAGE}, WRITE_EXTERNAL_STORAGE_ID);
 //    }
 
+
 }

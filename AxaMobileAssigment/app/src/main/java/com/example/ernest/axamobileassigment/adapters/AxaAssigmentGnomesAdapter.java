@@ -80,6 +80,7 @@ public class AxaAssigmentGnomesAdapter extends RecyclerView.Adapter<AxaAssigment
         GlideApp
                 .with(mContext)
                 .load(gnome.thumbnail)
+                .placeholder(R.drawable.ic_file_download)
                 .centerCrop()
                 .into(holder.mGnomePicture);
 
@@ -110,13 +111,18 @@ public class AxaAssigmentGnomesAdapter extends RecyclerView.Adapter<AxaAssigment
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
 
-        TextView mGnomeName;
+        TextView mGnomeName, mGnomeAge, mGnomeHairColor, mGnomeWeight, mGnomeHeight;
+
         ImageView mGnomePicture;
         public ItemClickListener mItemClickListener;
 
         public ViewHolder(View itemView) {
             super(itemView);
             mGnomeName = itemView.findViewById(R.id.tvGnomeName);
+            mGnomeAge = itemView.findViewById(R.id.tvGnomeAge);
+            mGnomeHairColor = itemView.findViewById(R.id.tvGnomeHairColor);
+            mGnomeWeight = itemView.findViewById(R.id.tvGnomeWeight);
+            mGnomeHeight = itemView.findViewById(R.id.tvGnomeHeight);
             mGnomePicture = itemView.findViewById(R.id.ivGnomePicture);
             itemView.setOnClickListener(this);
             itemView.setOnLongClickListener(this);

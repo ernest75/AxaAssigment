@@ -3,16 +3,20 @@
     <string name="main_activity_title">Brastlewark Census</string>
     <string name="gnome_name">Name :</string>
     <string name="gnome_name_default">Mayster,Marcus</string>
-    <string name="gnome_age">Age :</string>
+    <string name="gnome_age">Age</string>
     <string name="gnome_age_default">25</string>
-    <string name="gnome_weight">Weight :</string>
+    <string name="gnome_weight">Weight</string>
     <string name="gnome_weight_default">89.21</string>
-    <string name="gnome_height">Height :</string>
+    <string name="gnome_height">Height</string>
     <string name="gnome_height_default">1.74</string>
-    <string name="gnome_hair_color">Hair Color :</string>
+    <string name="gnome_hair_color">Hair</string>
     <string name="gnome_hair_color_default">Red</string>
     <string name="gnome_profesions">Profesions</string>
     <string name="gnome_friends">Friends</string>
-    <string name="btn_refresh_from_server_text">Refresh from server</string>
+    <string name="btn_refresh_from_server_text">Refresh</string>
+    <string name="some_name">Some Name</string>
+    <string name="gnome_name_placeholder">Tobus QuickWistle</string>
+    <string name="gnome_age_placeholder">140</string>
+
 
 </resources>
