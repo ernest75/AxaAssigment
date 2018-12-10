@@ -17,6 +17,7 @@
     <string name="some_name">Some Name</string>
     <string name="gnome_name_placeholder">Tobus QuickWistle</string>
     <string name="gnome_age_placeholder">140</string>
+    <string name="gnome_photo_transition">gnomePhotoTransition</string>
 
 
 </resources>

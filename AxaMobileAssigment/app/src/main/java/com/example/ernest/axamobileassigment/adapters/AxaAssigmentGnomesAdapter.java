@@ -31,7 +31,6 @@ import java.util.List;
 
 public class AxaAssigmentGnomesAdapter extends RecyclerView.Adapter<AxaAssigmentGnomesAdapter.ViewHolder>  {
 
-
     private List<Gnome> mGnomesList;
     private Context mContext;
     public AxaAssigmentGnomesAdapter(List<Gnome> gnomes, Context context){
@@ -39,33 +38,6 @@ public class AxaAssigmentGnomesAdapter extends RecyclerView.Adapter<AxaAssigment
         mContext = context;
     }
     private LayoutInflater mCursorInflater;
-
-//    public AxaAssigmentGnomesAdapter(Context context, Cursor cursor, int flags) {
-//        super(context, cursor, flags);
-//        mCursorInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-//    }
-//
-//
-//    @Override
-//    public View newView(Context context, Cursor cursor, ViewGroup parent) {
-//        View v = mCursorInflater.inflate(R.layout.gnome_row, parent, false);
-//        return v;
-//    }
-//
-//    @Override
-//    public void bindView(View view, Context context, Cursor cursor) {
-//        TextView tvGnomeName = (TextView) view.findViewById(R.id.tvGnomeName);
-//        tvGnomeName.setText(cursor.getString(cursor.getColumnIndex(Gnomes.COLUMN_GNOME_NAME)));
-//
-//        String imgUrl = cursor.getString(cursor.getColumnIndex(Gnomes.COLUMN_URL_IMAGE));
-//        if ((imgUrl != null) && (imgUrl.length() != 0)) {
-//            NetworkImageView thumbnail = (NetworkImageView) view.findViewById(R.id.idThumbnail);
-//            thumbnail.setImageUrl(imgUrl, VolleySingleton.getInstance(context).getImageLoader());
-//
-//        }
-
-
-
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -106,8 +78,6 @@ public class AxaAssigmentGnomesAdapter extends RecyclerView.Adapter<AxaAssigment
     public int getItemCount() {
         return mGnomesList.size();
     }
-
-
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
 
