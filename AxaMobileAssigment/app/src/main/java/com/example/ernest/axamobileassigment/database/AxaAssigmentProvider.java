@@ -12,11 +12,8 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
-import com.example.ernest.axamobileassigment.MainActivity;
 import com.example.ernest.axamobileassigment.database.AxaAssigmentContract.*;
 import com.example.ernest.axamobileassigment.model.RpgGameModel;
-
-import java.util.Locale;
 
 /**
  * Created by Ernest on 06/11/2017.

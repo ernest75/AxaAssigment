@@ -1,4 +1,4 @@
-package com.example.ernest.axamobileassigment;
+package com.example.ernest.axamobileassigment.constants;
 
 import java.util.ArrayList;
 

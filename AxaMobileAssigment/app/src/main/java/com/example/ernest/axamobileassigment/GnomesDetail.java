@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.ernest.axamobileassigment.adapters.SimpleRecyclerAdapter;
+import com.example.ernest.axamobileassigment.constants.Constants;
 import com.example.ernest.axamobileassigment.glide.GlideApp;
 import com.example.ernest.axamobileassigment.screens.common.activities.BaseActivity;
 

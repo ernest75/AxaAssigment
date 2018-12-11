@@ -1,27 +1,20 @@
 package com.example.ernest.axamobileassigment.adapters;
 
 import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 
-import com.android.volley.toolbox.NetworkImageView;
-import com.bumptech.glide.Glide;
-import com.example.ernest.axamobileassigment.Constants;
-import com.example.ernest.axamobileassigment.GnomesDetail;
 import com.example.ernest.axamobileassigment.ItemClickListener;
 import com.example.ernest.axamobileassigment.R;
 
 import com.example.ernest.axamobileassigment.glide.GlideApp;
 import com.example.ernest.axamobileassigment.model.Gnome;
+import com.example.ernest.axamobileassigment.screens.main.MainActivityPresenter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -33,9 +26,11 @@ public class AxaAssigmentGnomesAdapter extends RecyclerView.Adapter<AxaAssigment
 
     private List<Gnome> mGnomesList;
     private Context mContext;
-    public AxaAssigmentGnomesAdapter(List<Gnome> gnomes, Context context){
+    private MainActivityPresenter mPresenter;
+    public AxaAssigmentGnomesAdapter(List<Gnome> gnomes, Context context, MainActivityPresenter presenter){
         mGnomesList = gnomes;
         mContext = context;
+        mPresenter = presenter;
     }
     private LayoutInflater mCursorInflater;
 
@@ -59,16 +54,7 @@ public class AxaAssigmentGnomesAdapter extends RecyclerView.Adapter<AxaAssigment
         holder.setItemClickListener(new ItemClickListener() {
             @Override
             public void onClick(View view, int position, boolean isLongClick) {
-                Intent intent = new Intent(mContext,GnomesDetail.class);
-                intent.putExtra(Constants.GNOME_NAME, gnome.name);
-                intent.putExtra(Constants.GNOME_AGE,gnome.age);
-                intent.putExtra(Constants.GNOME_WEIGHT,gnome.weight);
-                intent.putExtra(Constants.GNOME_HEIGHT,gnome.height);
-                intent.putExtra(Constants.GNOME_HAIR_COLOR,gnome.hairColor);
-                intent.putStringArrayListExtra(Constants.GNOME_PROFESSIONS, (ArrayList<String>) gnome.professions);
-                intent.putStringArrayListExtra(Constants.GNOME_FRIENDS, (ArrayList<String>) gnome.friends);
-                intent.putExtra(Constants.GNOME_PICTURE, gnome.thumbnail);
-                mContext.startActivity(intent);
+                mPresenter.onGnomeCellClicked(gnome);
             }
         });
 
