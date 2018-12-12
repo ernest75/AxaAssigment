@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.util.Log;
 
 import com.example.ernest.axamobileassigment.constants.Constants;
-import com.example.ernest.axamobileassigment.GnomesDetail;
+import com.example.ernest.axamobileassigment.screens.gnomedetail.GnomesDetail;
 import com.example.ernest.axamobileassigment.model.City;
 import com.example.ernest.axamobileassigment.model.Gnome;
 import com.example.ernest.axamobileassigment.networking.GnomesApi;
@@ -60,6 +60,7 @@ public class MainActivityPresenter implements MainActivityMVP.Presenter {
     public void onGnomeCellClicked(Gnome gnome) {
         Intent intent = new Intent(mContext,GnomesDetail.class);
         intent.putExtra(Constants.GNOME_NAME, gnome.name);
+        intent.putExtra(Constants.GNOME_ID,gnome.id);
         intent.putExtra(Constants.GNOME_AGE,gnome.age);
         intent.putExtra(Constants.GNOME_WEIGHT,gnome.weight);
         intent.putExtra(Constants.GNOME_HEIGHT,gnome.height);

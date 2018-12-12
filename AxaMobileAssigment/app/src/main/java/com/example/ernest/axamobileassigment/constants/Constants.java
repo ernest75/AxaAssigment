@@ -13,7 +13,5 @@ public final class Constants {
     public static final String GNOME_PROFESSIONS = "gnome_professions";
     public static final String GNOME_FRIENDS = "gnome_friends";
     public static final String GNOME_PICTURE = "gnome_picture";
-
-
-
+    public static final String GNOME_ID = "id";
 }

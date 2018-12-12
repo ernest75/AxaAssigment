@@ -16,7 +16,7 @@ import javax.inject.Inject;
 
 public class PhotoDetailActivity extends BaseActivity {
 
-
+//todo comprobar animacio
     private static final String LOG_TAG = "PhotoDetailActivity";
     ImageView ivGnomePicture;
 
@@ -38,6 +38,7 @@ public class PhotoDetailActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        Log.e(LOG_TAG, "ON RESUME IS CALLED");
         Intent intent = getIntent();
         String urlImage = intent.getStringExtra(Constants.GNOME_PICTURE);
         GlideApp
@@ -51,13 +52,14 @@ public class PhotoDetailActivity extends BaseActivity {
 
     @Override
     protected void onDestroy() {
-        Log.e(LOG_TAG, "IS CALLED");
+        Log.e(LOG_TAG, "ON DESTROY IS CALLED");
         super.onDestroy();
     }
 
     @Override
     public void onBackPressed() {
         ivGnomePicture.setVisibility(View.GONE);
+        finish();
         super.onBackPressed();
 
     }

@@ -8,7 +8,9 @@ public interface MainActivityMVP {
 
     interface Model {
 
-        Gnome getGnome();
+        Gnome getGnomes();
+
+        void storeCall();
     }
 
     interface Presenter {

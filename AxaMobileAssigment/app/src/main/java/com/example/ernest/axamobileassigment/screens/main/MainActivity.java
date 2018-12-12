@@ -20,6 +20,8 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+//todo handle memory leaks
+
 public class MainActivity extends BaseActivity implements MainActivityMVP.View {
 
     private static final String LOG_TAG = MainActivity.class.getSimpleName();

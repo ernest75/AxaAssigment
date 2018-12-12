@@ -1,4 +1,4 @@
-package com.example.ernest.axamobileassigment;
+package com.example.ernest.axamobileassigment.screens.common;
 
 import android.view.View;
 
