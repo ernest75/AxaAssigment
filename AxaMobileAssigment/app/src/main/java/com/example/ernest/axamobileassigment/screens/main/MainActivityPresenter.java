@@ -17,6 +17,7 @@ import retrofit2.Callback;
 
 public class MainActivityPresenter implements MainActivityMVP.Presenter {
 
+    //todo testing
 
     private static final String LOG_TAG = MainActivityPresenter.class.getSimpleName();
 
