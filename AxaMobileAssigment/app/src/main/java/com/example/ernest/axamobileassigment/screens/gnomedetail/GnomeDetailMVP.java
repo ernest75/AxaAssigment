@@ -2,13 +2,12 @@ package com.example.ernest.axamobileassigment.screens.gnomedetail;
 
 import android.content.Intent;
 
-import com.example.ernest.axamobileassigment.model.GnomeRepo;
-
-import java.util.ArrayList;
+import com.example.ernest.axamobileassigment.model.GnomeApp;
 
 public interface GnomeDetailMVP {
 
     public interface View {
+
         Intent getIntentCreator();
 
         void showData();
@@ -18,13 +17,13 @@ public interface GnomeDetailMVP {
 
         void setView(GnomeDetailMVP.View view);
 
-        GnomeRepo getCurrentGnome();
+        GnomeApp getCurrentGnome();
 
     }
 
     public interface Model {
 
-        GnomeRepo getGnomeToShow(Intent intent);
+        GnomeApp getGnomeToShow(Intent intent);
 
     }
 

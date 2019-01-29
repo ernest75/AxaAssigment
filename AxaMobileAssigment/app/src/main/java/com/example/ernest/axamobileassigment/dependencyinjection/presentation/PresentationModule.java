@@ -8,11 +8,14 @@ import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 
 import com.example.ernest.axamobileassigment.dependencyinjection.application.NetworkingModule;
+import com.example.ernest.axamobileassigment.model.GnomeRepository;
 import com.example.ernest.axamobileassigment.model.RpgGameModel;
+import com.example.ernest.axamobileassigment.networking.GnomesApi;
 import com.example.ernest.axamobileassigment.screens.gnomedetail.GnomeDetailMVP;
 import com.example.ernest.axamobileassigment.screens.gnomedetail.GnomeDetailModel;
 import com.example.ernest.axamobileassigment.screens.gnomedetail.GnomeDetailPresenter;
 import com.example.ernest.axamobileassigment.screens.main.MainActivityPresenter;
+import com.example.ernest.axamobileassigment.screens.main.MainModel;
 
 import javax.inject.Singleton;
 
@@ -52,6 +55,21 @@ public class PresentationModule {
     @Singleton
     RpgGameModel rpgGameModel(){
         return new RpgGameModel();
+    }
+
+    @Provides
+    MainModel provideMainModel(GnomeRepository repository){
+        return new MainModel(repository);
+    }
+
+    @Provides
+    GnomeRepository provideGnomeRepository(GnomesApi gnomesApi){
+        return new GnomeRepository(gnomesApi);
+    }
+    //todo continua per aqui, oju que estas passant com a argument la clase en si i no el interface definit a MainActivityMVP
+    @Provides
+    MainActivityPresenter provideMainPresenter(Context context, GnomesApi gnomesApi,MainModel mainModel ){
+        return new MainActivityPresenter(context,gnomesApi,mainModel);
     }
 
     @Provides

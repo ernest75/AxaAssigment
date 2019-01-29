@@ -3,13 +3,13 @@ package com.example.ernest.axamobileassigment.screens.gnomedetail;
 import android.content.Intent;
 
 import com.example.ernest.axamobileassigment.constants.Constants;
-import com.example.ernest.axamobileassigment.model.GnomeRepo;
+import com.example.ernest.axamobileassigment.model.GnomeApp;
 
 public class GnomeDetailModel implements GnomeDetailMVP.Model  {
 
     @Override
-    public GnomeRepo getGnomeToShow(Intent intent) {
-            return new GnomeRepo(intent.getIntExtra(Constants.GNOME_ID,-1),
+    public GnomeApp getGnomeToShow(Intent intent) {
+            return new GnomeApp(intent.getIntExtra(Constants.GNOME_ID,-1),
                     intent.getStringExtra(Constants.GNOME_NAME),
                     intent.getIntExtra(Constants.GNOME_AGE,-1),
                     intent.getDoubleExtra(Constants.GNOME_WEIGHT,-1),

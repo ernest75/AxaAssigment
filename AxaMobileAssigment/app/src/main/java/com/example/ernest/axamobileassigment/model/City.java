@@ -10,4 +10,8 @@ public class City {
     @SerializedName("Brastlewark")
     @Expose
     public List<Gnome> brastlewark = null;
+
+    public List<Gnome> getBrastlewark() {
+        return brastlewark;
+    }
 }

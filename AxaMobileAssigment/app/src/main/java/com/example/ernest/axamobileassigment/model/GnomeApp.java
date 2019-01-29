@@ -3,11 +3,11 @@ package com.example.ernest.axamobileassigment.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GnomeRepo {
+public class GnomeApp {
 
 
-    public GnomeRepo(Integer id, String name, Integer age, Double weight, Double height,
-                     String hairColor, ArrayList<String> professions, ArrayList<String> friends, String urlImage) {
+    public GnomeApp(Integer id, String name, Integer age, Double weight, Double height,
+                    String hairColor, ArrayList<String> professions, ArrayList<String> friends, String urlImage) {
         this.id = id;
         this.name = name;
         this.age = age;

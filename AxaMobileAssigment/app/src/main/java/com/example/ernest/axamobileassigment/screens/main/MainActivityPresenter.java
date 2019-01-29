@@ -5,13 +5,20 @@ import android.content.Intent;
 import android.util.Log;
 
 import com.example.ernest.axamobileassigment.constants.Constants;
+import com.example.ernest.axamobileassigment.database.AxaAssigmentContract;
 import com.example.ernest.axamobileassigment.screens.gnomedetail.GnomesDetail;
 import com.example.ernest.axamobileassigment.model.City;
 import com.example.ernest.axamobileassigment.model.Gnome;
 import com.example.ernest.axamobileassigment.networking.GnomesApi;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.observers.DisposableObserver;
+import io.reactivex.schedulers.Schedulers;
 import retrofit2.Call;
 import retrofit2.Callback;
 
@@ -27,9 +34,19 @@ public class MainActivityPresenter implements MainActivityMVP.Presenter {
 
     GnomesApi mGnomesApi;
 
-    public MainActivityPresenter(Context mContext, GnomesApi mGnomesApi) {
+    List<Gnome> gnomes;
+
+    MainModel mMainModel;
+
+    private CompositeDisposable compositeDisposable = new CompositeDisposable();
+
+    private DisposableObserver<List<Gnome>> observable;
+
+
+    public MainActivityPresenter(Context mContext, GnomesApi mGnomesApi, MainModel mainModel) {
         this.mContext = mContext;
         this.mGnomesApi = mGnomesApi;
+        this.mMainModel = mainModel;
     }
 
     @Override
@@ -41,21 +58,34 @@ public class MainActivityPresenter implements MainActivityMVP.Presenter {
     @Override
     public void refreshButtonClicked() {
         mView.showProgressbar();
-        mGnomesApi.getGnomes().enqueue(new Callback<City>() {
-            @Override
-            public void onResponse(Call<City> call, retrofit2.Response<City> response) {
-                Log.e("SERVER RESPONSE : ", response.body().brastlewark.get(0).name);
-                mView.showData(response.body().brastlewark);
-                mView.hideProgressbar();
-            }
+        compositeDisposable.add(observable = mMainModel.getGnomesObservable()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new DisposableObserver<List<Gnome>>() {
+                    @Override
+                    public void onNext(List<Gnome> gnomes) {
+                        mView.showData(gnomes);
+                        mView.hideProgressbar();
+                    }
 
-            @Override
-            public void onFailure(Call<City> call, Throwable t) {
-                Log.e(LOG_TAG,"Server error");
-            }
-        });
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                })
+            );
+
 
     }
+
+
+
+    //todo acabar de perfilar composittedisposable.clear
 
     @Override
     public void onGnomeCellClicked(Gnome gnome) {
@@ -71,6 +101,11 @@ public class MainActivityPresenter implements MainActivityMVP.Presenter {
         intent.putExtra(Constants.GNOME_PICTURE, gnome.thumbnail);
         mContext.startActivity(intent);
 
+    }
+
+    @Override
+    public void clearStreams() {
+        compositeDisposable.clear();
     }
 
 }

@@ -26,6 +26,9 @@ ext{
     glideVersion = '4.8.0'
     daggerVersion = '2.14.1'
     circleImageViewVersion = '2.0.0'
+    mockserverVersion = '3.10.0'
+    rxJava2Version = '2.2.6'
+    rxAndroidVersion = '2.1.0'
 }
 
 dependencies {
@@ -39,6 +42,7 @@ dependencies {
     testImplementation 'org.mockito:mockito-core:2.12.0'
     androidTestImplementation 'org.mockito:mockito-android:2.7.22'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.1.0'
+    testImplementation "com.squareup.okhttp3:mockwebserver:$mockserverVersion"
 
     //Support libraries
     implementation "com.android.support:appcompat-v7:$supportLibraryVersion"
@@ -60,6 +64,11 @@ dependencies {
 
     //CircleImageView
     implementation "de.hdodenhof:circleimageview:$circleImageViewVersion"
+
+    //RxJava & RxAndroid
+    implementation "io.reactivex.rxjava2:rxjava:$rxJava2Version"
+    implementation "io.reactivex.rxjava2:rxandroid:$rxAndroidVersion"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion"
 
 
 

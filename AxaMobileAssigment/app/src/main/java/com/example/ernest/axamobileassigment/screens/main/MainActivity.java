@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.example.ernest.axamobileassigment.R;
 import com.example.ernest.axamobileassigment.adapters.AxaAssigmentGnomesAdapter;
@@ -19,8 +20,6 @@ import com.example.ernest.axamobileassigment.screens.common.activities.BaseActiv
 import java.util.List;
 
 import javax.inject.Inject;
-
-//todo handle memory leaks
 
 
 
@@ -43,6 +42,7 @@ public class MainActivity extends BaseActivity implements MainActivityMVP.View {
 
     ProgressBar mProgressBar;
 
+    @Inject
     MainActivityPresenter mPresenter;
 
     @Override
@@ -60,7 +60,6 @@ public class MainActivity extends BaseActivity implements MainActivityMVP.View {
         mProgressBar = findViewById(R.id.pbWaitingCircle);
 
         //instantiations
-        mPresenter = new MainActivityPresenter(mContext,mGnomesApi);
         mPresenter.setView(this);
 
         mBtnGetGnomes.setOnClickListener(new View.OnClickListener() {
@@ -88,5 +87,15 @@ public class MainActivity extends BaseActivity implements MainActivityMVP.View {
         mProgressBar.setVisibility(View.GONE);
     }
 
+    @Override
+    public void showErrorFromNetwork() {
+        Toast.makeText(mContext,"Server Error",Toast.LENGTH_LONG).show();
+    }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mPresenter.clearStreams();
+        mPresenter.setView(null);
+    }
 }

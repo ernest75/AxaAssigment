@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.util.Pair;
 import android.view.View;
 import android.widget.ImageView;
@@ -17,7 +16,7 @@ import com.example.ernest.axamobileassigment.R;
 import com.example.ernest.axamobileassigment.adapters.SimpleRecyclerAdapter;
 import com.example.ernest.axamobileassigment.constants.Constants;
 import com.example.ernest.axamobileassigment.glide.GlideApp;
-import com.example.ernest.axamobileassigment.model.GnomeRepo;
+import com.example.ernest.axamobileassigment.model.GnomeApp;
 import com.example.ernest.axamobileassigment.screens.common.activities.BaseActivity;
 
 import java.text.DecimalFormat;
@@ -45,7 +44,7 @@ public class GnomesDetail extends BaseActivity implements GnomeDetailMVP.View {
 
     private Intent mIntent;
 
-    private GnomeRepo mGnomeRepo;
+    private GnomeApp mGnomeRepo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -1,11 +1,6 @@
 package com.example.ernest.axamobileassigment.screens.gnomedetail;
 
-import android.content.Intent;
-
-import com.example.ernest.axamobileassigment.constants.Constants;
-import com.example.ernest.axamobileassigment.model.GnomeRepo;
-
-import java.util.ArrayList;
+import com.example.ernest.axamobileassigment.model.GnomeApp;
 
 public class GnomeDetailPresenter implements GnomeDetailMVP.Presenter {
 
@@ -24,7 +19,7 @@ public class GnomeDetailPresenter implements GnomeDetailMVP.Presenter {
     }
 
     @Override
-    public GnomeRepo getCurrentGnome() {
+    public GnomeApp getCurrentGnome() {
         return mModel.getGnomeToShow(mView.getIntentCreator());
     }
 
