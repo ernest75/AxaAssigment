@@ -29,6 +29,7 @@ ext{
     mockserverVersion = '3.10.0'
     rxJava2Version = '2.2.6'
     rxAndroidVersion = '2.1.0'
+    roomVersion = '1.1.1'
 }
 
 dependencies {
@@ -69,6 +70,11 @@ dependencies {
     implementation "io.reactivex.rxjava2:rxjava:$rxJava2Version"
     implementation "io.reactivex.rxjava2:rxandroid:$rxAndroidVersion"
     implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion"
+
+    //Room
+    implementation "android.arch.persistence.room:runtime:$roomVersion"
+    implementation "android.arch.persistence.room:rxjava2:$roomVersion"
+    annotationProcessor "android.arch.persistence.room:compiler:$roomVersion"
 
 
 

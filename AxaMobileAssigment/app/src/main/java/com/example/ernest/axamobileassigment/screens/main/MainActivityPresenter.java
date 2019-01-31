@@ -19,6 +19,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
+import io.reactivex.subscribers.ResourceSubscriber;
 import retrofit2.Call;
 import retrofit2.Callback;
 
@@ -58,7 +59,7 @@ public class MainActivityPresenter implements MainActivityMVP.Presenter {
     @Override
     public void refreshButtonClicked() {
         mView.showProgressbar();
-        compositeDisposable.add(observable = mMainModel.getGnomesObservable()
+        compositeDisposable.add(mMainModel.getGnomesObservable()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new DisposableObserver<List<Gnome>>() {
@@ -83,9 +84,8 @@ public class MainActivityPresenter implements MainActivityMVP.Presenter {
 
     }
 
-
-
     //todo acabar de perfilar composittedisposable.clear
+    //todo fer query a db i passar per intent o mirar superlink
 
     @Override
     public void onGnomeCellClicked(Gnome gnome) {
@@ -105,7 +105,36 @@ public class MainActivityPresenter implements MainActivityMVP.Presenter {
 
     @Override
     public void clearStreams() {
+        mMainModel.clearStreams();
         compositeDisposable.clear();
+    }
+
+    @Override
+    public void getInfoFromDb() {
+
+        mView.showProgressbar();
+        compositeDisposable.add(mMainModel.getGnomesFromDb()
+                .subscribeOn(Schedulers.computation())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new ResourceSubscriber<List<Gnome>>() {
+                    @Override
+                    public void onNext(List<Gnome> gnomes) {
+                        mView.showData(gnomes);
+                        mView.hideProgressbar();
+                    }
+
+                    @Override
+                    public void onError(Throwable t) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                })
+        );
+
     }
 
 }

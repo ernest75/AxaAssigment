@@ -23,4 +23,15 @@ public final class Constants {
             "\"height\":110.43628,\"hair_color\":\"Green\",\"professions\":[\"Brewer\",\"Medic\",\"Prospector\",\"Gemcutter\",\"Mason\"," +
             "\"Tailor\"],\"friends\":[]}]}";
 
+    public static final String TABLE_NAME_GNOMES = "gnomeTable";
+    public static final String ROW_GNOME_NAME = "gnomeNameRow";
+    public static final String ROW_GNOME_THUMBNAIL = "gnomePictureRow";
+    public static final String ROW_GNOME_AGE = "gnomeAgeRow";
+    public static final String ROW_GNOME_WEIGHT = "gnomeWeightRow";
+    public static final String ROW_GNOME_HEIGHT = "gnomeHeightRow";
+    public static final String ROW_GNOME_HAIR_COLOR = "gnomeHairColorRow";
+    public static final String ROW_GNOME_PROFESSIONS_LIST = "gnomeProfessionsRow";
+    public static final String ROW_GNOME_FRIENDS_LIST = "gnomeFriendsRow";
+    public static final String ROW_GNOME_ID_REMOTE = "gnomeIdRemoteRow";
+    public static final String DB_GNOMES = "gnomesDb";
 }

@@ -5,6 +5,7 @@ import com.example.ernest.axamobileassigment.model.GnomeRepository;
 
 import java.util.List;
 
+import io.reactivex.Flowable;
 import io.reactivex.Observable;
 
 public class MainModel implements MainActivityMVP.Model {
@@ -19,4 +20,15 @@ public class MainModel implements MainActivityMVP.Model {
     public Observable<List<Gnome>> getGnomesObservable() {
         return mGnomeRepository.getGnomesFromNetwork();
     }
+
+    @Override
+    public Flowable<List<Gnome>> getGnomesFromDb(){
+        return mGnomeRepository.getGnomesFromDb();
+    }
+
+    @Override
+    public void clearStreams() {
+        mGnomeRepository.clearDbStreams();
+    }
+
 }

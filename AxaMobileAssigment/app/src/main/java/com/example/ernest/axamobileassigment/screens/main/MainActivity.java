@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
@@ -24,6 +25,8 @@ import javax.inject.Inject;
 
 
 public class MainActivity extends BaseActivity implements MainActivityMVP.View {
+
+    //todo handle orientation
 
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
 
@@ -59,8 +62,7 @@ public class MainActivity extends BaseActivity implements MainActivityMVP.View {
         mBtnGetGnomes = findViewById(R.id.btnGetGnomes);
         mProgressBar = findViewById(R.id.pbWaitingCircle);
 
-        //instantiations
-        mPresenter.setView(this);
+
 
         mBtnGetGnomes.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,6 +71,16 @@ public class MainActivity extends BaseActivity implements MainActivityMVP.View {
             }
         });
 
+        Log.e(LOG_TAG, "onCreate called");
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        //instantiations
+        mPresenter.setView(this);
+        mPresenter.getInfoFromDb();
     }
 
     @Override
@@ -95,7 +107,11 @@ public class MainActivity extends BaseActivity implements MainActivityMVP.View {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        mPresenter.clearStreams();
-        mPresenter.setView(null);
+        if (isFinishing()){
+            mPresenter.clearStreams();
+            mPresenter.setView(null);
+
+        }
+
     }
 }

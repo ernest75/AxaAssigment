@@ -4,6 +4,7 @@ import com.example.ernest.axamobileassigment.model.Gnome;
 
 import java.util.List;
 
+import io.reactivex.Flowable;
 import io.reactivex.Observable;
 
 public interface MainActivityMVP {
@@ -12,7 +13,9 @@ public interface MainActivityMVP {
 
         Observable<List<Gnome>> getGnomesObservable();
 
-        //void storeCall();
+        Flowable<List<Gnome>> getGnomesFromDb();
+
+        void clearStreams();
     }
 
     interface Presenter {
@@ -24,6 +27,8 @@ public interface MainActivityMVP {
         void onGnomeCellClicked(Gnome gnome);
 
         void clearStreams();
+
+        void getInfoFromDb();
 
 
     }

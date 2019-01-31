@@ -1,16 +1,20 @@
 package com.example.ernest.axamobileassigment.dependencyinjection.presentation;
 
 import android.app.Activity;
+import android.arch.persistence.room.Room;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 
+import com.example.ernest.axamobileassigment.constants.Constants;
 import com.example.ernest.axamobileassigment.dependencyinjection.application.NetworkingModule;
 import com.example.ernest.axamobileassigment.model.GnomeRepository;
 import com.example.ernest.axamobileassigment.model.RpgGameModel;
 import com.example.ernest.axamobileassigment.networking.GnomesApi;
+import com.example.ernest.axamobileassigment.room.GnomeDAO;
+import com.example.ernest.axamobileassigment.room.GnomesAppDatabase;
 import com.example.ernest.axamobileassigment.screens.gnomedetail.GnomeDetailMVP;
 import com.example.ernest.axamobileassigment.screens.gnomedetail.GnomeDetailModel;
 import com.example.ernest.axamobileassigment.screens.gnomedetail.GnomeDetailPresenter;
@@ -58,15 +62,15 @@ public class PresentationModule {
     }
 
     @Provides
-    MainModel provideMainModel(GnomeRepository repository){
-        return new MainModel(repository);
+    MainModel provideMainModel(GnomesApi gnomesApi, GnomeDAO gnomeDAO){
+        return new MainModel(new GnomeRepository(gnomesApi,gnomeDAO));
     }
 
-    @Provides
-    GnomeRepository provideGnomeRepository(GnomesApi gnomesApi){
-        return new GnomeRepository(gnomesApi);
-    }
-    //todo continua per aqui, oju que estas passant com a argument la clase en si i no el interface definit a MainActivityMVP
+//    @Provides
+//    GnomeRepository provideGnomeRepository(GnomesApi gnomesApi, Context context){
+//        return new GnomeRepository(gnomesApi, context);
+//    }
+
     @Provides
     MainActivityPresenter provideMainPresenter(Context context, GnomesApi gnomesApi,MainModel mainModel ){
         return new MainActivityPresenter(context,gnomesApi,mainModel);
@@ -80,6 +84,18 @@ public class PresentationModule {
     @Provides
     GnomeDetailMVP.Presenter provideGnomeDetailPresenter(){
         return new GnomeDetailPresenter(provideGnomeDetailModel());
+    }
+
+    @Singleton
+    @Provides
+    public GnomesAppDatabase provideGnomeDatabase(Context context){
+        return Room.databaseBuilder(context,GnomesAppDatabase.class,Constants.DB_GNOMES).build();
+    }
+
+    @Singleton
+    @Provides
+    public GnomeDAO provideGnomeDao(GnomesAppDatabase gnomesAppDatabase) {
+        return gnomesAppDatabase.getGnomeDAO();
     }
 
 
